@@ -1,0 +1,35 @@
+{
+  "provider": "Google Cloud Platform - Status Dashboard",
+  "region": "southamerica-west1 (Santiago)",
+  "timestamp": "2026-10-28T14:30:00Z",
+  "services": [
+    {
+      "name": "Google Kubernetes Engine (GKE)",
+      "status": "OPERATIONAL",
+      "latency_ms": 45,
+      "incident_flag": false,
+      "description": "Plano de control y nodos funcionando normalmente."
+    },
+    {
+      "name": "Cloud SQL (PostgreSQL)",
+      "status": "DEGRADED_PERFORMANCE",
+      "latency_ms": 480,
+      "incident_flag": true,
+      "description": "Elevada latencia en operaciones de disco en la zona southamerica-west1-a. El proveedor global ejecuta tareas de mitigación."
+    },
+    {
+      "name": "Cloud Storage",
+      "status": "OPERATIONAL",
+      "latency_ms": 28,
+      "incident_flag": false,
+      "description": "Acceso a buckets y objetos estable."
+    },
+    {
+      "name": "Cloud Identity-Aware Proxy (IAP)",
+      "status": "OPERATIONAL",
+      "latency_ms": 32,
+      "incident_flag": false,
+      "description": "Túneles seguros y autenticación contextual operativa."
+    }
+  ]
+}

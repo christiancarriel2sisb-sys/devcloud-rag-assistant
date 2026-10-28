@@ -1,0 +1,30 @@
+CODIGO DE DOCUMENTO: SOP-TI-2026-V1
+TITULO: PROTOCOLO ESTANDAR DE OPERACIONES PARA INCIDENTES DE INFRAESTRUCTURA Y CONTENEDORES
+EMPRESA: DevCloud Solutions SpA
+CLASIFICACION: INTERNO / CONFIDENCIAL
+
+1. POLITICAS DE ESCALAMIENTO Y SEVERIDAD
+- Severidad P1 (Critica): Caida total del servicio en entorno productivo o indisponibilidad de la base de datos principal que afecte a mas del 20% de los usuarios. Tiempo maximo de respuesta: 15 minutos. Requiere notificacion inmediata al Tech Lead de guardia.
+- Severidad P2 (Alta): Degradacion sustancial de rendimiento, tiempos de respuesta superiores a 2500 ms en APIs principales o fallos intermitentes en servicios secundarios. Tiempo maximo de respuesta: 1 hora.
+- Severidad P3 (Media/Baja): Errores en ambientes de staging, incidencias menores de visualizacion o dudas sobre configuracion de entornos. Tiempo maximo de respuesta: 8 horas.
+
+2. CODIGOS DE ERROR RECURRENTES EN CONTENEDORES Y SOLUCION TECNICA
+- Error "OOMKilled" (Exit Code 137):
+  * Causa: El contenedor ha superado el limite de memoria RAM configurado en su manifiesto de Kubernetes o Docker.
+  * Procedimiento:
+    1. Revisar los logs previos al fallo con el comando: kubectl logs <pod-name> --previous
+    2. Verificar metricas de uso de memoria en Prometheus/Grafana.
+    3. Si el pod esta en ambiente staging, incrementar temporalmente el parametro 'resources.limits.memory' en un 25% en el deployment.
+    4. En ambiente de produccion, no reiniciar directamente sin autorizacion del Lead SRE; solicitar volcado de memoria antes del reinicio para analizar posibles fugas (memory leaks).
+
+- Error "CrashLoopBackOff" (Exit Code 1):
+  * Causa: El proceso principal de la aplicacion falla inmediatamente tras el inicio debido a variables de entorno faltantes o dependencias de red no alcanzables.
+  * Procedimiento:
+    1. Verificar que el Secret y ConfigMap esten correctamente inyectados en el contenedor.
+    2. Comprobar conectividad DNS interna ejecutando un pod efimero de prueba con nslookup hacia la base de datos.
+    3. Reintentar el despliegue con la ultima version de imagen estable previamente etiquetada como 'release-stable'.
+
+3. PROTOCOLO DE RESTABLECIMIENTO DE BASE DE DATOS POSTGRESQL
+- Ante bloqueo de conexiones activas ("FATAL: remaining connection slots are reserved"):
+  * Ejecutar el script interno de terminacion de conexiones inactivas: SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE state = 'idle' AND state_change < current_timestamp - INTERVAL '15' MINUTE;
+  * Si la situacion persiste por mas de 5 minutos, activar el pooler de conexiones secundario (PgBouncer) y reportar de inmediato como incidencia P1.

@@ -1,0 +1,20 @@
+CODIGO DE DOCUMENTO: SEC-POL-CLOUD-V2
+TITULO: POLITICA CORPORATIVA DE SEGURIDAD, ACCESOS IAM Y REDES CLOUD
+EMPRESA: DevCloud Solutions SpA
+CLASIFICACION: USO INTERNO OBLIGATORIO
+
+1. CONTROL DE ACCESOS Y ROLES IAM (GOOGLE CLOUD PLATFORM)
+- Principio de Menor Privilegio: Ningun desarrollador o ingeniero de soporte puede tener asignado el rol permanente de 'Owner' o 'Editor' a nivel de proyecto productivo.
+- Cuentas de Servicio (Service Accounts):
+  * Las claves JSON exportadas estan estrictamente prohibidas en repositorios Git y maquinas locales. Se debe utilizar Workload Identity Federation para autenticacion de servicios.
+  * Las cuentas de servicio para pipelines de CI/CD solo pueden poseer permisos especificos de despliegue sobre artefactos y clusters delimitados por namespace.
+
+2. GESTION DE ACCESOS TEMPORALES A PRODUCCION (BREAK-GLASS)
+- Para intervenir servidores o bases de datos productivas durante una emergencia P1:
+  * El ingeniero debe solicitar acceso de emergencia a traves del canal de guardia, registrando el numero de ticket de soporte.
+  * La elevacion de permisos tendra una vigencia maxima e improrrogable de 120 minutos, tras lo cual se revocaran automaticamente los accesos temporales.
+  * Todo comando ejecutado durante la ventana 'break-glass' queda auditado en Cloud Audit Logs.
+
+3. REGLAS DE SEGURIDAD EN REDES VPC Y FIREWALL
+- Queda prohibido abrir puertos de gestion remota (SSH puerto 22, RDP puerto 3389) hacia Internet publico (0.0.0.0/0). Toda conexion administrativa debe canalizarse via tunel IAP (Identity-Aware Proxy) o VPN corporativa.
+- Las bases de datos y clusters de almacenamiento no deben poseer IP publica bajo ninguna circunstancia.

@@ -1,0 +1,22 @@
+CODIGO: SEC-POL-CLOUD-V2
+TITULO: Política de Seguridad, IAM y Gobernanza Cloud
+CLASIFICACION: Interno / Seguridad de la Información
+VERSION: 2.0
+
+1. PRINCIPIO DE MENOR PRIVILEGIO (IAM)
+- Queda estrictamente prohibida la asignación permanente de roles amplios o privilegiados como `Owner` o `Editor` en los proyectos de nube corporativos.
+- Todos los usuarios y cuentas de servicio deben operar bajo el principio de menor privilegio, asignando únicamente los roles específicos requeridos para su función (por ejemplo, `roles/viewer`, `roles/container.developer`).
+
+2. CREDENCIALES Y CUENTAS DE SERVICIO
+- Está terminantemente prohibida la descarga, almacenamiento o transferencia local de archivos de clave privada en formato JSON (`Service Account Keys`).
+- La autenticación de cargas de trabajo desplegadas en clústeres debe realizarse obligatoriamente mediante *Workload Identity* o mecanismos de autenticación federada gestionada por el proveedor de nube.
+
+3. PROTOCOLO BREAK-GLASS PARA EMERGENCIAS
+- El protocolo `Break-Glass` se reserva exclusivamente para situaciones críticas de producción (Incidentes P1) donde los permisos estándar fallen y se requiera intervención de emergencia.
+- La elevación de privilegios mediante cuentas de emergencia está sujeta a una ventana de tiempo estricta con un máximo de 120 minutos de duración.
+- Toda activación de este protocolo debe quedar documentada obligatoriamente y asociada a un ID de ticket válido en el sistema de gestión de incidentes (Jira/ServiceNow).
+
+4. POLÍTICAS DE RED Y ACCESO PERIMETRAL
+- Bloqueo total de puertos administrativos directos hacia Internet (`0.0.0.0/0`), incluyendo SSH (puerto 22) y RDP (puerto 3389).
+- El acceso operativo a nodos y recursos internos debe realizarse exclusivamente a través de túneles seguros cifrados mediante VPN corporativa o Cloud Identity-Aware Proxy (IAP).
+- Los grupos de seguridad y firewalls deben seguir políticas de denegación por defecto, permitiendo sólo tráfico explícitamente autorizado.

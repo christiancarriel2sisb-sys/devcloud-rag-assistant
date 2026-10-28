@@ -1,0 +1,26 @@
+CODIGO: SOP-TI-2026-V1
+TITULO: Protocolos de Incidencias Técnicas y Gestión de Errores Operacionales
+CLASIFICACION: Interno / Operaciones TI
+VERSION: 1.0
+
+1. MATRIZ DE SEVERIDAD Y ACUERDOS DE NIVEL DE SERVICIO (SLA)
+- P1 (Crítico): Caída total de servicios en producción, pérdida de datos o indisponibilidad de bases de datos principales. Tiempo de respuesta (SLA) máximo: < 15 minutos. Requiere escalamiento inmediato al Lead de Guardia y apertura de War Room.
+- P2 (Alto): Degradación severa de rendimiento, fallo en microservicios redundantes o errores intermitentes en pasarelas de pago/API. Tiempo de respuesta (SLA) máximo: < 60 minutos.
+- P3 (Medio): Incidencias menores, alertas de advertencia en logs sin impacto directo al usuario final, o fallos en entornos de staging. Tiempo de respuesta (SLA) máximo: < 8 horas.
+
+2. ERRORES DE CONTENEDORES Y ORQUESTACIÓN (KUBERNETES / DOCKER)
+- Exit Code 137 (OOMKilled): El contenedor excedió el límite de memoria RAM asignado (`limits.memory`). El operador debe revisar el archivo de despliegue, incrementar el límite de memoria en al menos 25% o diagnosticar fugas de memoria (*memory leaks*) en la aplicación.
+- Exit Code 1 (CrashLoopBackOff): La aplicación falló al iniciar debido a errores en variables de entorno, fallos de conexión a dependencias (BD, Redis) o excepciones no capturadas en el arranque.
+- Exit Code 143 (SIGTERM): El contenedor recibió una señal de terminación estándar (generalmente durante un escalado hacia abajo o reinicio planificado). Si ocurre de forma imprevista, verificar políticas de health checks y liveliness probes.
+
+3. COMANDOS DE DIAGNÓSTICO ESTÁNDAR
+- Para inspeccionar los logs recientes de un pod con fallos: `kubectl logs <nombre-pod> --tail=100 -n <namespace>`
+- Para obtener el estado detallado, eventos recientes y configuración de recursos de un recurso: `kubectl describe <recurso> <nombre> -n <namespace>`
+- Para consultar métricas de uso de recursos en tiempo real: Monitoreo mediante Prometheus y dashboards en Grafana (panel de utilización de CPU/RAM por clúster).
+
+4. SATURACIÓN Y GESTIÓN DE BASES DE DATOS (POSTGRESQL)
+- Error crítico por saturación: `FATAL: remaining connection slots are reserved for non-replication superuser connections`. Indica que se agotó el pool máximo de conexiones (`max_connections`).
+- Procedimiento de mitigación:
+  1. Identificar conexiones activas e inactivo-ociosas ejecutando la consulta de diagnóstico sobre `pg_stat_activity`.
+  2. Liquidar de forma segura las sesiones ociosas o colgadas utilizando la función de terminación: `SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE state = 'idle in transaction' AND state_change < current_timestamp - interval '10 minutes';`
+  3. Reconfigurar el connection pooler (PgBouncer) y ajustar el parámetro `max_connections` según la capacidad de la instancia Cloud SQL.

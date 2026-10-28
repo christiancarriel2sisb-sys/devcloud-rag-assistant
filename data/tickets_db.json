@@ -1,0 +1,18 @@
+[
+  {
+    "ticket_id": "INC-1001",
+    "fecha_creacion": "2026-10-28T12:37:17.235713",
+    "titulo": "Incidente OOMKilled en staging resuelto",
+    "severidad": "P3",
+    "estado": "RESUELTO_AUTOMATICO",
+    "diagnostico_y_acciones": "Mitigado exitosamente bajo [SOP-TI-2026-V1]"
+  },
+  {
+    "ticket_id": "INC-1002",
+    "fecha_creacion": "2026-10-28T12:37:55.041866",
+    "titulo": "Bloqueo Operacional en Produccion - Pod con OOMKilled",
+    "severidad": "P1",
+    "estado": "ESCALADO_A_SRE",
+    "diagnostico_y_acciones": "Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE."
+  }
+]

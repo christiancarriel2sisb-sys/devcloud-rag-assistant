@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+basura/
+data/vector_store/
+data/long_term_memory_db/
+*.sqlite3
+.DS_Store

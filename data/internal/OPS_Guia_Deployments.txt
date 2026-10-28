@@ -1,0 +1,21 @@
+CODIGO: OPS-GUIA-DEPLOY-V1
+TITULO: Guía de Despliegues, CI/CD y Gestión de Recursos
+CLASIFICACION: Interno / Operaciones y DevOps
+VERSION: 1.0
+
+1. ESTRATEGIAS DE DESPLIEGUE CONTINUO
+- Canary Deployments: Utilizado para cambios mayores o actualizaciones críticas en microservicios core. Se debe enrutar inicialmente un 5% del tráfico al nuevo despliegue (*canary*), monitoreando latencia y errores durante 15 minutos antes de escalar progresivamente al 25%, 50% y 100%.
+- Blue-Green Deployments: Recomendado para despliegues de bases de datos o aplicaciones web monolíticas. Permite mantener el entorno operativo anterior (*Blue*) intacto mientras se valida el nuevo entorno (*Green*), realizando un cambio de tráfico atómico mediante balanceadores de carga.
+
+2. POLÍTICAS AUTOMÁTICAS DE ROLLBACK
+- Reglas de reversión automática: Los pipelines de CI/CD y los controladores de despliegue deben ejecutar un rollback automático a la versión estable anterior si el porcentaje de errores HTTP 5xx supera el umbral del 2% sostenido en un lapso continuo de 5 minutos.
+- Alertas de despliegue: Cualquier rollback automático debe disparar una notificación prioritaria en el canal de alertas de Slack y registrar un incidente de nivel P2 para investigación post-mortem.
+
+3. CONFIGURACIÓN ESTÁNDAR DE RECURSOS (KUBERNETES)
+- Rangos estándar de asignación de CPU para microservicios estándar:
+  - `requests: 250m` (0.25 núcleos de CPU garantizados).
+  - `limits: 1000m` (1 núcleo de CPU máximo).
+- Rangos estándar de asignación de memoria RAM para microservicios estándar:
+  - `requests: 512Mi` (512 Megabytes garantizados).
+  - `limits: 2Gi` (2 Gigabytes máximos antes de aplicar OOMKilled).
+- Todo manifiesto de despliegue debe declarar explícitamente tanto `requests` como `limits` para prevenir saturación de nodos en el clúster GKE.

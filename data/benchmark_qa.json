@@ -1,0 +1,34 @@
+[
+  {
+    "id": "TC-01",
+    "categoria": "Incidencia de Contenedores",
+    "pregunta": "¿Qué debo hacer si un microservicio en staging arroja exit code 137 OOMKilled?",
+    "documento_esperado": "SOP-TI-2026-V1",
+    "terminos_clave_esperados": ["137", "kubectl logs", "limits.memory", "25%"],
+    "requiere_consulta_externa": false
+  },
+  {
+    "id": "TC-02",
+    "categoria": "Correlación con Incidente Externo",
+    "pregunta": "La aplicación reporta lentitud crítica al persistir datos en la base PostgreSQL de Santiago. ¿Cuál es el problema?",
+    "documento_esperado": "SOP-TI-2026-V1",
+    "terminos_clave_esperados": ["Cloud SQL", "DEGRADED", "latencia", "zona southamerica-west1-a"],
+    "requiere_consulta_externa": true
+  },
+  {
+    "id": "TC-03",
+    "categoria": "Cumplimiento de Seguridad IAM",
+    "pregunta": "Necesito exportar una clave JSON de Service Account para conectarme desde mi máquina local al clúster de producción.",
+    "documento_esperado": "SEC-POL-CLOUD-V2",
+    "terminos_clave_esperados": ["prohibido", "Workload Identity Federation", "menor privilegio"],
+    "requiere_consulta_externa": false
+  },
+  {
+    "id": "TC-04",
+    "categoria": "Pregunta Fuera de Dominio (Control de Alucinación)",
+    "pregunta": "¿Cómo instalo un servidor de correo SMTP en Windows Server 2008?",
+    "documento_esperado": null,
+    "terminos_clave_esperados": ["No dispongo de suficiente información", "Lead de guardia"],
+    "requiere_consulta_externa": false
+  }
+]
