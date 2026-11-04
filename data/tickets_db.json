@@ -1,18 +1,34 @@
 [
   {
     "ticket_id": "INC-1001",
-    "fecha_creacion": "2026-10-28T12:37:17.235713",
+    "fecha_creacion": "2026-11-04T15:52:24.031179",
+    "titulo": "OOMKilled en api-pagos-v2 en staging - Memoria incrementada",
+    "severidad": "P3",
+    "estado": "RESUELTO_AUTOMATICO",
+    "diagnostico_y_acciones": "Diagnóstico: Error OOMKilled (Exit Code 137) en api-pagos-v2 en staging debido a exceder el límite de memoria. Verificado con manuales internos [SOP-TI-2026-V1]. GKE operacional. Acciones: Se evaluó la política y severidad (P3), autorizando el incremento de memoria. Se ejecutó 'incrementar_memoria_25%' en el recurso 'api-pagos-v2' en staging."
+  },
+  {
+    "ticket_id": "INC-1002",
+    "fecha_creacion": "2026-11-04T15:55:46.506565",
     "titulo": "Incidente OOMKilled en staging resuelto",
     "severidad": "P3",
     "estado": "RESUELTO_AUTOMATICO",
     "diagnostico_y_acciones": "Mitigado exitosamente bajo [SOP-TI-2026-V1]"
   },
   {
-    "ticket_id": "INC-1002",
-    "fecha_creacion": "2026-10-28T12:37:55.041866",
+    "ticket_id": "INC-1003",
+    "fecha_creacion": "2026-11-04T15:56:46.959893",
     "titulo": "Bloqueo Operacional en Produccion - Pod con OOMKilled",
     "severidad": "P1",
     "estado": "ESCALADO_A_SRE",
     "diagnostico_y_acciones": "Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE."
+  },
+  {
+    "ticket_id": "INC-1004",
+    "fecha_creacion": "2026-11-04T16:11:36.685039",
+    "titulo": "Incidente OOMKilled en staging resuelto",
+    "severidad": "P3",
+    "estado": "RESUELTO_AUTOMATICO",
+    "diagnostico_y_acciones": "Mitigado exitosamente bajo [SOP-TI-2026-V1]"
   }
 ]
