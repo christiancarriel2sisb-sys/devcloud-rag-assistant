@@ -1,11 +1,3 @@
-"""
-Script Evaluador de Observabilidad, Rendimiento y Trazabilidad (EP3 - IE1, IE2, IE3, IE6, IE8).
-Ejecuta la batería de escenarios variables (data/scenarios_ep3.json), calcula métricas de:
-- Precisión (%), Consistencia entre variaciones semánticas (%), Tasa de Errores y Fallbacks (%)
-- Latencia (Promedio, P50, P95, Máxima) y Desglose por Etapa/Span (Cuellos de botella)
-- Consumo de Tokens, Throughput (tokens/s), Costo Acumulado (USD) y Memoria RAM (MB)
-Genera automáticamente logs/agent_runs.csv, logs/agent_spans.csv, logs/agent_events.jsonl y logs/resumen_metricas_ep3.json.
-"""
 import os
 import sys
 import csv
@@ -24,7 +16,6 @@ LOGS_DIR = "logs"
 
 
 def inicializar_archivos_logs(logs_dir: str) -> None:
-    """Reinicia el contenido de los archivos de corrida en logs/ (sin eliminar archivos) para una medición limpia."""
     os.makedirs(logs_dir, exist_ok=True)
     runs_path = os.path.join(logs_dir, "agent_runs.csv")
     spans_path = os.path.join(logs_dir, "agent_spans.csv")
@@ -42,7 +33,6 @@ def evaluar_precision_escenario(
     escenario: Dict[str, Any],
     resultado: Dict[str, Any],
 ) -> bool:
-    """Evalúa deterministamente si la ejecución cumplió con la decisión, herramientas y términos esperados."""
     obs = resultado["observabilidad"]
     decision_obtenida = obs["decision_final"]
     decision_esperada = escenario["decision_esperada"]
