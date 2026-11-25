@@ -1,7 +1,7 @@
 [
   {
     "ticket_id": "INC-1001",
-    "fecha_creacion": "2026-11-25T14:58:55.253344",
+    "fecha_creacion": "2026-11-25T15:23:05.517309",
     "titulo": "Incidente en auth-service (staging) mitigado automaticamente",
     "severidad": "P3",
     "estado": "RESUELTO_AUTOMATICO",
@@ -9,10 +9,18 @@
   },
   {
     "ticket_id": "INC-1002",
-    "fecha_creacion": "2026-11-25T14:58:56.922286",
+    "fecha_creacion": "2026-11-25T15:23:07.322807",
     "titulo": "Bloqueo Operacional en Produccion - payment-gateway",
     "severidad": "P1",
     "estado": "ESCALADO_A_SRE",
     "diagnostico_y_acciones": "Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE."
+  },
+  {
+    "ticket_id": "INC-1003",
+    "fecha_creacion": "2026-11-25T15:24:53.152895",
+    "titulo": "Degradacion Externa Cloud SQL southamerica-west1",
+    "severidad": "P1",
+    "estado": "ESCALADO_A_SRE",
+    "diagnostico_y_acciones": "Se detectó DEGRADED_PERFORMANCE en Cloud SQL regional. Se escala a SRE según [SOP-TI-2026-V1]."
   }
 ]

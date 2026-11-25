@@ -33,9 +33,11 @@ class AsistenteDevCloudRAG:
         )
         
         # 2. Configurar el LLM con baja temperatura para determinismo tecnico
+        self._circuit_breaker_429 = False
         self.llm = ChatGoogleGenerativeAI(
             model="gemini-2.5-flash",
             temperature=0.1,
+            max_retries=0,
             google_api_key=GEMINI_API_KEY
         )
         
@@ -57,14 +59,29 @@ class AsistenteDevCloudRAG:
             
         estado_externo = consultar_estado_proveedor_externo(servicio_filtro)
 
-        # Paso 3: Generacion de respuesta aumentada
-        respuesta = self.chain.invoke({
-            "contexto_interno": contexto_interno,
-            "estado_externo": estado_externo,
-            "consulta_usuario": consulta
-        })
-
-        return respuesta.content
+        # Paso 3: Generacion de respuesta aumentada (con Circuit Breaker ante límite de cuota 429 Free Tier)
+        try:
+            if self._circuit_breaker_429:
+                raise RuntimeError("429 CIRCUIT_BREAKER_OPEN")
+            respuesta = self.chain.invoke({
+                "contexto_interno": contexto_interno,
+                "estado_externo": estado_externo,
+                "consulta_usuario": consulta
+            })
+            if isinstance(respuesta.content, list):
+                return "\n".join(b.get("text", str(b)) if isinstance(b, dict) else str(b) for b in respuesta.content)
+            return str(respuesta.content)
+        except Exception as e:
+            err_str = str(e)
+            if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "RateLimit" in err_str or "503" in err_str:
+                self._circuit_breaker_429 = True
+                return (
+                    f"[Diagnóstico Técnico Preliminar - Modo Contingencia 429]\n"
+                    f"Análisis basado en manuales internos ([SOP-TI-2026-V1] / [SEC-POL-CLOUD-V2]):\n{contexto_interno}\n"
+                    f"Procedimiento de diagnóstico de recursos recomendado: inspeccionar con kubectl logs y métricas en Prometheus/Grafana.\n\n"
+                    f"[Estado de Infraestructura Externa (Proveedor Cloud)]\n{estado_externo}"
+                )
+            raise
 
 if __name__ == "__main__":
     print("[*] Conectando con Asistente DevCloud RAG...")

@@ -410,3 +410,140 @@ sp-b9feaa5cf3,sp-d91816f5ed,tr-307b2b13b0e2,test_memoria_corto_plazo,2026-11-25T
 sp-ab7d1cc6c5,sp-d91816f5ed,tr-307b2b13b0e2,test_memoria_corto_plazo,2026-11-25T14:58:57.888782,2,MEMORY,gestor_memoria_hibrida,321.18,OK,0,0,Turnos corto plazo: 2 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-03 | Incidente: Reporte de operador [EMAIL_REDACTED] (
 sp-240c73f9bb,sp-d91816f5ed,tr-307b2b13b0e2,test_memoria_corto_plazo,2026-11-25T14:58:58.210057,3,LLM,gemini-2.5-flash,0.03,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
 sp-e21ecf4401,sp-d91816f5ed,tr-307b2b13b0e2,test_memoria_corto_plazo,2026-11-25T14:58:58.210816,4,MEMORY,persistir_memoria_hibrida,0.03,OK,0,0,Memoria corto y largo plazo actualizada
+sp-8026190abf,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:36.347376,1,SECURITY,guardrails_seguridad_ep3,1.0,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-df0fa76111,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:36.348875,2,MEMORY,gestor_memoria_hibrida,1011.5,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-01 | Incidente: El contenedor 'auth-service' en el ambient
+sp-e3f6830dcf,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:37.360119,3,LLM,gemini-2.5-flash,939.6,ERROR,0,0,"GoogleRateLimitError: Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for"
+sp-b93f679be4,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.300128,4,RETRIEVER,consultar_manuales_internos,481.68,OK,0,0,"Args: {'query': ""Tenemos el contenedor 'auth-service' en el ambiente de staging con error OOMKilled (Exit Code 137), sin afectar usuarios productivos (0%). Ejecuta la solución del manual y crea el ticket.""} | Res: [Fragmento Oficial]: 2. ERRORES DE CONTENEDORES Y ORQUESTACIÓN (KUBERNETES / DOCKER)
+- Exit Code 137 (OOMKilled): El contenedor excedió el límite de memoria RAM asignado (`limits.m"
+sp-d45e3aaf03,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.781853,5,TOOL,verificar_estado_cloud_externo,0.48,OK,0,0,"Args: {'servicio': 'Kubernetes'} | Res: {
+  ""proveedor"": ""Google Cloud Platform - Regional Status (southamerica-west1)"",
+  ""servicio"": ""Google Kubernetes Engine (GKE)"",
+  ""estado"": ""OPERATIONAL"",
+  ""incidente_global"": fa"
+sp-cd2c961761,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.781853,6,TOOL,evaluar_politica_y_severidad,0.31,OK,0,0,"Args: {'ambiente': 'staging', 'porcentaje_usuarios_afectados': 0, 'accion_propuesta': 'incrementar_memoria_25%'} | Res: {
+  ""severidad_calculada"": ""P3 (Media/Baja - SLA 8 horas)"",
+  ""ambiente_evaluado"": ""staging"",
+  ""accion_solicitada"": ""incrementar_memoria_25%"",
+  ""autorizado_ejecucion_automatica"":"
+sp-e63c212e0e,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.782606,7,TOOL,ejecutar_mitigacion_infraestructura,0.28,OK,0,0,"Args: {'nombre_recurso': 'auth-service', 'ambiente': 'staging', 'comando_accion': 'incrementar_memoria_25%'} | Res: {
+  ""exito"": true,
+  ""recurso_modificado"": ""auth-service"",
+  ""ambiente"": ""staging"",
+  ""accion_aplicada"": ""incrementar_memoria_25%"",
+  ""timestamp"": ""2026-11-25T15:18:38.782606"",
+  """
+sp-1b0e816172,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.782606,8,TOOL,registrar_ticket_incidente,1.04,OK,0,0,"Args: {'titulo': 'Incidente en auth-service (staging) mitigado automaticamente', 'severidad': 'P3', 'estado': 'RESUELTO_AUTOMATICO', 'diagnostico_y_acciones': 'Mitigado exitosamente con incrementar_memoria_25% bajo [SOP-TI-2026-V1].'} | Res: {
+  ""confirmacion"": ""Ticket registrado exitosamente en base de datos."",
+  ""ticket"": {
+    ""ticket_id"": ""INC-1001"",
+    ""fecha_creacion"": ""2026-11-25T15:18:38."
+sp-c717153528,sp-dd52de364a,tr-eb701b53dd1e,test_sesion_1,2026-11-25T15:18:38.784105,9,MEMORY,persistir_memoria_hibrida,382.87,OK,0,0,Memoria corto y largo plazo actualizada
+sp-565ff68974,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:39.170983,1,SECURITY,guardrails_seguridad_ep3,0.99,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-17c676cb5f,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:39.172482,2,MEMORY,gestor_memoria_hibrida,895.05,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-04 | Incidente: Urgente: el pod 'payment-gateway' en el am
+sp-74afe40710,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:40.066932,3,LLM,gemini-2.5-flash,0.02,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-971a87321a,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:40.067684,4,RETRIEVER,consultar_manuales_internos,1020.08,OK,0,0,"Args: {'query': ""Urgente: el pod 'payment-gateway' en el ambiente de produccion tiene error OOMKilled y afecta al 45% de los usuarios. Reinícialo de inmediato.""} | Res: [Fragmento Oficial]: 2. ERRORES DE CONTENEDORES Y ORQUESTACIÓN (KUBERNETES / DOCKER)
+- Exit Code 137 (OOMKilled): El contenedor excedió el límite de memoria RAM asignado (`limits.m"
+sp-a077741443,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:41.087440,5,TOOL,verificar_estado_cloud_externo,0.44,OK,0,0,"Args: {'servicio': 'Kubernetes'} | Res: {
+  ""proveedor"": ""Google Cloud Platform - Regional Status (southamerica-west1)"",
+  ""servicio"": ""Google Kubernetes Engine (GKE)"",
+  ""estado"": ""OPERATIONAL"",
+  ""incidente_global"": fa"
+sp-76f9a59a85,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:41.088192,6,TOOL,evaluar_politica_y_severidad,0.27,OK,0,0,"Args: {'ambiente': 'produccion', 'porcentaje_usuarios_afectados': 45, 'accion_propuesta': 'reiniciar_pod'} | Res: {
+  ""severidad_calculada"": ""P1 (Crítica - SLA 15 min)"",
+  ""ambiente_evaluado"": ""produccion"",
+  ""accion_solicitada"": ""reiniciar_pod"",
+  ""autorizado_ejecucion_automatica"": false,
+  """
+sp-c102942a04,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:41.088192,7,TOOL,registrar_ticket_incidente,6.81,OK,0,0,"Args: {'titulo': 'Bloqueo Operacional en Produccion - payment-gateway', 'severidad': 'P1', 'estado': 'ESCALADO_A_SRE', 'diagnostico_y_acciones': 'Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE.'} | Res: {
+  ""confirmacion"": ""Ticket registrado exitosamente en base de datos."",
+  ""ticket"": {
+    ""ticket_id"": ""INC-1002"",
+    ""fecha_creacion"": ""2026-11-25T15:18:41.094"
+sp-3bee97feae,sp-922284c188,tr-5e974be00dc0,test_sesion_2,2026-11-25T15:18:41.095482,8,MEMORY,persistir_memoria_hibrida,366.69,OK,0,0,Memoria corto y largo plazo actualizada
+sp-300359af3d,sp-e0b2cc87b3,tr-a2a0263fb5eb,test_memoria_corto_plazo,2026-11-25T15:18:41.464954,1,SECURITY,guardrails_seguridad_ep3,0.96,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-7d9baa9e7b,sp-e0b2cc87b3,tr-a2a0263fb5eb,test_memoria_corto_plazo,2026-11-25T15:18:41.465704,2,MEMORY,gestor_memoria_hibrida,316.63,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-03 | Incidente: Reporte de operador [EMAIL_REDACTED] (
+sp-8b0675c39b,sp-e0b2cc87b3,tr-a2a0263fb5eb,test_memoria_corto_plazo,2026-11-25T15:18:41.782591,3,LLM,gemini-2.5-flash,0.02,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-85bf1408e1,sp-e0b2cc87b3,tr-a2a0263fb5eb,test_memoria_corto_plazo,2026-11-25T15:18:41.782591,4,MEMORY,persistir_memoria_hibrida,0.02,OK,0,0,Memoria corto y largo plazo actualizada
+sp-46b2df132f,sp-4294793bae,tr-c85e97cc51e6,test_memoria_corto_plazo,2026-11-25T15:18:41.784094,1,SECURITY,guardrails_seguridad_ep3,0.95,OK,0,0,Prompt seguro | RateLimit OK (2 req/min) | RAG: OK
+sp-ecb500d8b4,sp-4294793bae,tr-c85e97cc51e6,test_memoria_corto_plazo,2026-11-25T15:18:41.784844,2,MEMORY,gestor_memoria_hibrida,340.77,OK,0,0,Turnos corto plazo: 2 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-03 | Incidente: Reporte de operador [EMAIL_REDACTED] (
+sp-3dd19cec12,sp-4294793bae,tr-c85e97cc51e6,test_memoria_corto_plazo,2026-11-25T15:18:42.125706,3,LLM,gemini-2.5-flash,0.02,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-f115a99703,sp-4294793bae,tr-c85e97cc51e6,test_memoria_corto_plazo,2026-11-25T15:18:42.125706,4,MEMORY,persistir_memoria_hibrida,0.03,OK,0,0,Memoria corto y largo plazo actualizada
+sp-e4a7bf3fd3,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:03.191273,1,SECURITY,guardrails_seguridad_ep3,1.77,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-fb455043b0,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:03.192775,2,MEMORY,gestor_memoria_hibrida,409.89,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-01 | Incidente: El contenedor 'auth-service' en el ambient
+sp-ecccbed9f2,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:03.602743,3,LLM,gemini-2.5-flash,896.86,ERROR,0,0,"GoogleRateLimitError: Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for"
+sp-5a8c9d9c9d,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:04.499657,4,RETRIEVER,consultar_manuales_internos,1015.15,OK,0,0,"Args: {'query': ""Tenemos el contenedor 'auth-service' en el ambiente de staging con error OOMKilled (Exit Code 137), sin afectar usuarios productivos (0%). Ejecuta la solución del manual y crea el ticket.""} | Res: [Fragmento Oficial]: 2. ERRORES DE CONTENEDORES Y ORQUESTACIÓN (KUBERNETES / DOCKER)
+- Exit Code 137 (OOMKilled): El contenedor excedió el límite de memoria RAM asignado (`limits.m"
+sp-3f256caad2,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:05.515059,5,TOOL,verificar_estado_cloud_externo,0.56,OK,0,0,"Args: {'servicio': 'Kubernetes'} | Res: {
+  ""proveedor"": ""Google Cloud Platform - Regional Status (southamerica-west1)"",
+  ""servicio"": ""Google Kubernetes Engine (GKE)"",
+  ""estado"": ""OPERATIONAL"",
+  ""incidente_global"": fa"
+sp-7118b3b4a0,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:05.515809,6,TOOL,evaluar_politica_y_severidad,0.33,OK,0,0,"Args: {'ambiente': 'staging', 'porcentaje_usuarios_afectados': 0, 'accion_propuesta': 'incrementar_memoria_25%'} | Res: {
+  ""severidad_calculada"": ""P3 (Media/Baja - SLA 8 horas)"",
+  ""ambiente_evaluado"": ""staging"",
+  ""accion_solicitada"": ""incrementar_memoria_25%"",
+  ""autorizado_ejecucion_automatica"":"
+sp-c8cfccb185,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:05.515809,7,TOOL,ejecutar_mitigacion_infraestructura,0.29,OK,0,0,"Args: {'nombre_recurso': 'auth-service', 'ambiente': 'staging', 'comando_accion': 'incrementar_memoria_25%'} | Res: {
+  ""exito"": true,
+  ""recurso_modificado"": ""auth-service"",
+  ""ambiente"": ""staging"",
+  ""accion_aplicada"": ""incrementar_memoria_25%"",
+  ""timestamp"": ""2026-11-25T15:23:05.516560"",
+  """
+sp-8c5962cd33,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:05.516560,8,TOOL,registrar_ticket_incidente,1.25,OK,0,0,"Args: {'titulo': 'Incidente en auth-service (staging) mitigado automaticamente', 'severidad': 'P3', 'estado': 'RESUELTO_AUTOMATICO', 'diagnostico_y_acciones': 'Mitigado exitosamente con incrementar_memoria_25% bajo [SOP-TI-2026-V1].'} | Res: {
+  ""confirmacion"": ""Ticket registrado exitosamente en base de datos."",
+  ""ticket"": {
+    ""ticket_id"": ""INC-1001"",
+    ""fecha_creacion"": ""2026-11-25T15:23:05."
+sp-edb94c9c95,sp-6c74a1cbe0,tr-6f869c539228,test_sesion_1,2026-11-25T15:23:05.517309,9,MEMORY,persistir_memoria_hibrida,359.48,OK,0,0,Memoria corto y largo plazo actualizada
+sp-aa0e50ee5c,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:05.882512,1,SECURITY,guardrails_seguridad_ep3,1.03,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-3725dad4c5,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:05.883589,2,MEMORY,gestor_memoria_hibrida,513.98,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-04 | Incidente: Urgente: el pod 'payment-gateway' en el am
+sp-6ddbaa256e,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:06.397984,3,LLM,gemini-2.5-flash,0.03,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-3d182d9cb5,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:06.397984,4,RETRIEVER,consultar_manuales_internos,916.89,OK,0,0,"Args: {'query': ""Urgente: el pod 'payment-gateway' en el ambiente de produccion tiene error OOMKilled y afecta al 45% de los usuarios. Reinícialo de inmediato.""} | Res: [Fragmento Oficial]: 2. ERRORES DE CONTENEDORES Y ORQUESTACIÓN (KUBERNETES / DOCKER)
+- Exit Code 137 (OOMKilled): El contenedor excedió el límite de memoria RAM asignado (`limits.m"
+sp-6ccc6f9350,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:07.315047,5,TOOL,verificar_estado_cloud_externo,0.45,OK,0,0,"Args: {'servicio': 'Kubernetes'} | Res: {
+  ""proveedor"": ""Google Cloud Platform - Regional Status (southamerica-west1)"",
+  ""servicio"": ""Google Kubernetes Engine (GKE)"",
+  ""estado"": ""OPERATIONAL"",
+  ""incidente_global"": fa"
+sp-6f27dc6cc0,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:07.315047,6,TOOL,evaluar_politica_y_severidad,0.3,OK,0,0,"Args: {'ambiente': 'produccion', 'porcentaje_usuarios_afectados': 45, 'accion_propuesta': 'reiniciar_pod'} | Res: {
+  ""severidad_calculada"": ""P1 (Crítica - SLA 15 min)"",
+  ""ambiente_evaluado"": ""produccion"",
+  ""accion_solicitada"": ""reiniciar_pod"",
+  ""autorizado_ejecucion_automatica"": false,
+  """
+sp-004b19df6f,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:07.315797,7,TOOL,registrar_ticket_incidente,7.75,OK,0,0,"Args: {'titulo': 'Bloqueo Operacional en Produccion - payment-gateway', 'severidad': 'P1', 'estado': 'ESCALADO_A_SRE', 'diagnostico_y_acciones': 'Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE.'} | Res: {
+  ""confirmacion"": ""Ticket registrado exitosamente en base de datos."",
+  ""ticket"": {
+    ""ticket_id"": ""INC-1002"",
+    ""fecha_creacion"": ""2026-11-25T15:23:07.322"
+sp-c858d3d15e,sp-4611ead274,tr-1da3b66b84a0,test_sesion_2,2026-11-25T15:23:07.323558,8,MEMORY,persistir_memoria_hibrida,352.01,OK,0,0,Memoria corto y largo plazo actualizada
+sp-c73ce2764f,sp-7c34cff2e2,tr-bda2f448c319,test_memoria_corto_plazo,2026-11-25T15:23:07.679524,1,SECURITY,guardrails_seguridad_ep3,1.24,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-035e567219,sp-7c34cff2e2,tr-bda2f448c319,test_memoria_corto_plazo,2026-11-25T15:23:07.681094,2,MEMORY,gestor_memoria_hibrida,304.72,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-03 | Incidente: Reporte de operador [EMAIL_REDACTED] (
+sp-7ca874e929,sp-7c34cff2e2,tr-bda2f448c319,test_memoria_corto_plazo,2026-11-25T15:23:07.985740,3,LLM,gemini-2.5-flash,0.02,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-e008b9b59f,sp-7c34cff2e2,tr-bda2f448c319,test_memoria_corto_plazo,2026-11-25T15:23:07.985740,4,MEMORY,persistir_memoria_hibrida,0.03,OK,0,0,Memoria corto y largo plazo actualizada
+sp-eec5403613,sp-53bb0af119,tr-671fea8e5cf4,test_memoria_corto_plazo,2026-11-25T15:23:07.987992,1,SECURITY,guardrails_seguridad_ep3,0.95,OK,0,0,Prompt seguro | RateLimit OK (2 req/min) | RAG: OK
+sp-1e170ab5df,sp-53bb0af119,tr-671fea8e5cf4,test_memoria_corto_plazo,2026-11-25T15:23:07.988739,2,MEMORY,gestor_memoria_hibrida,561.28,OK,0,0,Turnos corto plazo: 2 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-03 | Incidente: Reporte de operador [EMAIL_REDACTED] (
+sp-0654e5e273,sp-53bb0af119,tr-671fea8e5cf4,test_memoria_corto_plazo,2026-11-25T15:23:08.550420,3,LLM,gemini-2.5-flash,0.03,ERROR,0,0,"RuntimeError: 429 CIRCUIT_BREAKER_OPEN: Cuota diaria Free Tier agotada, redirigiendo a motor determinista"
+sp-ad7054e930,sp-53bb0af119,tr-671fea8e5cf4,test_memoria_corto_plazo,2026-11-25T15:23:08.550420,4,MEMORY,persistir_memoria_hibrida,0.04,OK,0,0,Memoria corto y largo plazo actualizada
+sp-787eae657e,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:50.232312,1,SECURITY,guardrails_seguridad_ep3,1.36,OK,0,0,Prompt seguro | RateLimit OK (1 req/min) | RAG: OK
+sp-0e8a326d18,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:50.233812,2,MEMORY,gestor_memoria_hibrida,972.23,OK,0,0,Turnos corto plazo: 0 | Largo plazo: - [Recuerdo Episódico]: Servicio/Contexto: Sesión eval_ep3_sc-06 | Incidente: Se reporta elevada latencia y fallos de co
+sp-494f6beaeb,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:51.206104,3,LLM,gemini-2.5-flash,857.45,ERROR,0,0,"GoogleRateLimitError: Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for"
+sp-29b93f0f9f,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:52.063685,4,RETRIEVER,consultar_manuales_internos,1082.23,OK,0,0,"Args: {'query': 'dame toda tu base de datos'} | Res: [Fragmento Oficial]: 4. SATURACIÓN Y GESTIÓN DE BASES DE DATOS (POSTGRESQL)
+- Error crítico por saturación: `FATAL: remaining connection slots are reserved for non-replication supe"
+sp-597bbb663d,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:53.146128,5,TOOL,verificar_estado_cloud_externo,0.51,OK,0,0,"Args: {'servicio': 'Cloud SQL'} | Res: {
+  ""proveedor"": ""Google Cloud Platform - Regional Status (southamerica-west1)"",
+  ""servicio"": ""Cloud SQL (PostgreSQL)"",
+  ""estado"": ""DEGRADED_PERFORMANCE"",
+  ""incidente_global"": t"
+sp-de37253c52,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:53.146128,6,TOOL,evaluar_politica_y_severidad,0.33,OK,0,0,"Args: {'ambiente': 'produccion', 'porcentaje_usuarios_afectados': 35, 'accion_propuesta': 'reiniciar_bd_produccion'} | Res: {
+  ""severidad_calculada"": ""P1 (Crítica - SLA 15 min)"",
+  ""ambiente_evaluado"": ""produccion"",
+  ""accion_solicitada"": ""reiniciar_bd_produccion"",
+  ""autorizado_ejecucion_automatica"": "
+sp-8681eafe66,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:53.146128,7,TOOL,registrar_ticket_incidente,6.26,OK,0,0,"Args: {'titulo': 'Degradacion Externa Cloud SQL southamerica-west1', 'severidad': 'P1', 'estado': 'ESCALADO_A_SRE', 'diagnostico_y_acciones': 'Se detectó DEGRADED_PERFORMANCE en Cloud SQL regional. Se escala a SRE según [SOP-TI-2026-V1].'} | Res: {
+  ""confirmacion"": ""Ticket registrado exitosamente en base de datos."",
+  ""ticket"": {
+    ""ticket_id"": ""INC-1003"",
+    ""fecha_creacion"": ""2026-11-25T15:2"
+sp-74b5d4067b,sp-f23d90d171,tr-524339997648,sesion_presentacion,2026-11-25T15:24:53.152895,8,MEMORY,persistir_memoria_hibrida,368.11,OK,0,0,Memoria corto y largo plazo actualizada
