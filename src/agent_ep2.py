@@ -71,7 +71,7 @@ class AgenteOperacionesDevCloud:
         traza_herramientas: List[Dict[str, Any]],
         parent_span_id: Optional[str] = None,
     ) -> Any:
-
+        etapa_span = "RETRIEVER" if nombre_tool == "consultar_manuales_internos" else "TOOL"
         with tracer.span(etapa_span, nombre_tool, parent_span_id=parent_span_id) as sp_tool:
             herramienta_fn = self.mapa_herramientas.get(nombre_tool)
             if herramienta_fn:
@@ -397,14 +397,32 @@ class AgenteOperacionesDevCloud:
                             {"error": err_str[:220]},
                         )
                         in_est = max(sum(len(str(m.content)) for m in mensajes) // 4, 180)
-                        if not traza_herramientas:
+                        tools_previas = {t["herramienta"] for t in traza_herramientas}
+                        if "registrar_ticket_incidente" not in tools_previas:
+                            # Si el 429 ocurrió antes o a mitad del flujo (antes de cerrar el ticket),
+                            # completamos las herramientas faltantes con el plan determinista
+                            traza_herramientas_prev = list(traza_herramientas)
+                            traza_extra: List[Dict[str, Any]] = []
                             respuesta_final = self._ejecutar_plan_contingencia(
-                                consulta_usuario, session_id, tracer, traza_herramientas
+                                consulta_usuario, session_id, tracer, traza_extra
                             )
+                            for item in traza_extra:
+                                if item["herramienta"] not in tools_previas:
+                                    item["paso"] = len(traza_herramientas) + 1
+                                    traza_herramientas.append(item)
+                                    tools_previas.add(item["herramienta"])
                         else:
-                            # Si ya había ejecutado herramientas en iteraciones previas, solo sintetizar respuesta
+                            # Si ya había completado el ticket en iteraciones previas, sintetizar incluyendo estado real
+                            estado_ticket = ""
+                            for t in traza_herramientas:
+                                res_str = str(t.get("resultado", ""))
+                                if "ESCALADO_A_SRE" in res_str or "BLOQUEO" in res_str:
+                                    estado_ticket = "ESCALADO_A_SRE (Bloqueo operacional aplicado)"
+                                elif "RESUELTO_AUTOMATICO" in res_str and not estado_ticket:
+                                    estado_ticket = "RESUELTO_AUTOMATICO"
                             respuesta_final = (
                                 f"Operación completada mediante plan adaptativo ([SOP-TI-2026-V1] / [SEC-POL-CLOUD-V2]). "
+                                f"Estado final: {estado_ticket or 'COMPLETADO'}. "
                                 f"Herramientas ejecutadas: {[t['herramienta'] for t in traza_herramientas]}."
                             )
                         out_est = max(len(respuesta_final) // 4, 60)

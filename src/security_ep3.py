@@ -53,8 +53,9 @@ def sanitizar_texto(texto: Any) -> str:
         return ""
     s = str(texto)
 
-    #apikeys
+    # API Keys (Google Gemini AIza / AQ, OpenAI, GitHub)
     s = re.sub(r"AIza[0-9A-Za-z\-_]{20,}", "[API_KEY_REDACTED]", s)
+    s = re.sub(r"AQ\.[0-9A-Za-z\-_.]{20,}", "[API_KEY_REDACTED]", s)
     s = re.sub(r"sk-[0-9A-Za-z\-_]{16,}", "[API_KEY_REDACTED]", s)
     s = re.sub(r"ghp_[0-9A-Za-z]{20,}", "[TOKEN_REDACTED]", s)
 

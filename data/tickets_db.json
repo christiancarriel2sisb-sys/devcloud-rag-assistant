@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ticket_id": "INC-1001",
+    "fecha_creacion": "2026-11-25T14:58:55.253344",
+    "titulo": "Incidente en auth-service (staging) mitigado automaticamente",
+    "severidad": "P3",
+    "estado": "RESUELTO_AUTOMATICO",
+    "diagnostico_y_acciones": "Mitigado exitosamente con incrementar_memoria_25% bajo [SOP-TI-2026-V1]."
+  },
+  {
+    "ticket_id": "INC-1002",
+    "fecha_creacion": "2026-11-25T14:58:56.922286",
+    "titulo": "Bloqueo Operacional en Produccion - payment-gateway",
+    "severidad": "P1",
+    "estado": "ESCALADO_A_SRE",
+    "diagnostico_y_acciones": "Acción de reinicio bloqueada por política [SOP-TI-2026-V1]. Se escala a equipo SRE."
+  }
+]
