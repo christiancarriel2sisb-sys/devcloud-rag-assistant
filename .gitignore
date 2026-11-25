@@ -4,7 +4,15 @@ __pycache__/
 .env
 .pytest_cache/
 basura/
+conceptos/
+logs/demo_test/
 data/vector_store/
 data/long_term_memory_db/
 *.sqlite3
 .DS_Store
+
+# Archivos personales y borradores (no necesarios para ejecutar el proyecto)
+verify.py
+readme_md.md
+GUIA_POWER_BI_EP3.md
+~$*.docx

@@ -1,0 +1,85 @@
+{
+  "fecha_evaluacion": "2026-11-25T04:44:41.036291",
+  "total_escenarios_ejecutados": 12,
+  "total_spans_registrados": 97,
+  "metricas_calidad_ie1": {
+    "tasa_precision_pct": 100.0,
+    "tasa_consistencia_pct": 100.0,
+    "tasa_errores_api_pct": 66.67,
+    "tasa_recuperacion_fallback_pct": 100.0,
+    "detalle_consistencia_grupos": {
+      "GRP_STAGING_OOM": {
+        "decision_dominante": "RESUELTO_AUTOMATICO",
+        "muestras": 3,
+        "consistencia_pct": 100.0
+      },
+      "GRP_PROD_BLOCK": {
+        "decision_dominante": "ESCALADO_A_SRE",
+        "muestras": 3,
+        "consistencia_pct": 100.0
+      },
+      "GRP_SEC_IAM": {
+        "decision_dominante": "ESCALADO_A_SRE",
+        "muestras": 2,
+        "consistencia_pct": 100.0
+      },
+      "GRP_ATTACK_INJ": {
+        "decision_dominante": "BLOQUEADO_SEGURIDAD",
+        "muestras": 2,
+        "consistencia_pct": 100.0
+      }
+    }
+  },
+  "metricas_rendimiento_ie2": {
+    "latencia_promedio_ms": 17694.96,
+    "latencia_mediana_p50_ms": 2101.76,
+    "latencia_p95_ms": 57625.86,
+    "latencia_maxima_ms": 57625.86,
+    "tokens_totales_consumidos": 49395,
+    "tokens_promedio_por_consulta": 4116.2,
+    "costo_total_estimado_usd": 0.031504,
+    "memoria_ram_pico_mb": 158.39
+  },
+  "analisis_cuellos_de_botella_ie3": {
+    "SECURITY": {
+      "cantidad_spans": 12,
+      "latencia_promedio_ms": 1.12,
+      "latencia_max_ms": 1.3,
+      "latencia_acumulada_ms": 13.48,
+      "porcentaje_tiempo_total": 0.01
+    },
+    "MEMORY": {
+      "cantidad_spans": 20,
+      "latencia_promedio_ms": 601.68,
+      "latencia_max_ms": 995.71,
+      "latencia_acumulada_ms": 12033.53,
+      "porcentaje_tiempo_total": 5.67
+    },
+    "LLM": {
+      "cantidad_spans": 23,
+      "latencia_promedio_ms": 8200.82,
+      "latencia_max_ms": 37471.67,
+      "latencia_acumulada_ms": 188618.83,
+      "porcentaje_tiempo_total": 88.83
+    },
+    "RETRIEVER": {
+      "cantidad_spans": 12,
+      "latencia_promedio_ms": 964.98,
+      "latencia_max_ms": 1014.13,
+      "latencia_acumulada_ms": 11579.71,
+      "porcentaje_tiempo_total": 5.45
+    },
+    "TOOL": {
+      "cantidad_spans": 30,
+      "latencia_promedio_ms": 2.91,
+      "latencia_max_ms": 10.0,
+      "latencia_acumulada_ms": 87.17,
+      "porcentaje_tiempo_total": 0.04
+    }
+  },
+  "seguridad_y_blindaje_ie8": {
+    "ataques_prompt_injection_bloqueados": 2,
+    "logs_sanitizados_pii": true,
+    "integridad_rag_sha256": "OK"
+  }
+}
