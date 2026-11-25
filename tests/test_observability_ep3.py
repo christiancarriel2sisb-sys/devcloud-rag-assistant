@@ -29,7 +29,7 @@ def test_ie8_deteccion_prompt_injection():
 def test_ie8_sanitizacion_pii_y_secretos():
     texto_crudo = (
         "Operador ch.carriel@duocuc.cl con RUT 18.234.567-K desde IP 10.20.30.40 "
-        "usó key AIzaSyCpcpFHh3ugf7nmq7p692I66zuES9Y52I4 en regla 0.0.0.0/0."
+        "usó key AIzaSyFakeTestKeyEjemplo12345678901234 en regla 0.0.0.0/0."
     )
     limpio = sanitizar_texto(texto_crudo)
 

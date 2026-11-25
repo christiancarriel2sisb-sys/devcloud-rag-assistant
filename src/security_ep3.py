@@ -185,7 +185,7 @@ if __name__ == "__main__":
     # 2. Prueba Sanitización
     texto_sensible = (
         "Usuario ch.carriel@duocuc.cl (RUT 12.345.678-9) desde IP 192.168.1.50 "
-        "envió clave AIzaSyCpcpFHh3ugf7nmq7p692I66zuES9Y52I4 y regla 0.0.0.0/0."
+        "envió clave AIzaSyFakeTestKeyEjemplo12345678901234 y regla 0.0.0.0/0."
     )
     print("\n[2] Texto sanitizado:\n   ", sanitizar_texto(texto_sensible))
     # 3. Prueba Integridad RAG
